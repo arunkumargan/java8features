@@ -35,7 +35,6 @@
 			<div class="slides">
 				<section>
 					<h1>Java 8</h1>
-					<h3>Teaser</h3>
 
 				</section>
 				<section>
@@ -43,8 +42,8 @@
 					An interface with exactly one abstract method
 					<pre>
 						<code class="java">
-public interface Runnable {
-    public abstract void run();
+public interface Comparator&lt;T&gt; {
+    int compare(T o1, T o2);
 }
 						</code>
 					</pre>
@@ -55,20 +54,19 @@ public interface Runnable {
 					<pre>
 						<code class="java">
 @FunctionalInterface					
-public interface Runnable {
-    public abstract void run();
+public interface Comparator&lt;T&gt; {
+    int compare(T o1, T o2);
 }
 						</code>
 					</pre>
 				</section>	
 				<section>
 					<h3>Is this a  functional Interface?</h3>
-					Let the compiler enforce it using @FunctionalInterface annotation
 					<pre>
 						<code class="java">
 @FunctionalInterface					
-public interface Runnable {
-    public abstract void run();
+public interface Foo {
+    public void doSomething1();
 }
 						</code>
 					</pre>
@@ -80,7 +78,8 @@ public interface Runnable {
 						<code class="java">
 @FunctionalInterface					
 public interface Foo {
-    public abstract void run();
+    public void doSomething1();
+    public void doSomething2();
     
 }
 						</code>
@@ -107,14 +106,14 @@ public class Bot {
 public abstract class SampleBotsList {
     public static List&lt;Bot&gt; getSampleBots() {
         return Arrays.asList(
-                new Bot(&quot;Karolos&quot;,       &quot;Chuck Eastus&quot;,               1,  21772 ),
-                new Bot(&quot;TaggartBot&quot;,    &quot;Don Taggart&quot;,                2,  12870 ),
-                new Bot(&quot;DrunkenBoxer&quot;,  &quot;Courtney &amp; Courtland Jones&quot;, 3,  11428 ),
                 new Bot(&quot;SeafarerRobot&quot;, &quot;Biju Kunjummen&quot;,             4,  9232  ),
+                new Bot(&quot;Dreamer&quot;,       &quot;Rick Ryker&quot;,                 8,  5129  ),
+                new Bot(&quot;DrunkenBoxer&quot;,  &quot;Courtney &amp; Courtland Jones&quot;, 3,  11428 ),
                 new Bot(&quot;Dandroid&quot;,      &quot;Dan Gradl&quot;,                  5,  7896  ),
+                new Bot(&quot;Karolos&quot;,       &quot;Chuck Eastus&quot;,               1,  21772 ),
                 new Bot(&quot;Schizoid&quot;,      &quot;Michael Dowden&quot;,             6,  6428  ),
-                new Bot(&quot;AggressiveBot&quot;, &quot;Michael Slattery&quot;,           7,  5779  ),
-                new Bot(&quot;Dreamer&quot;,       &quot;Rick Ryker&quot;,                 8,  5129  )
+                new Bot(&quot;TaggartBot&quot;,    &quot;Don Taggart&quot;,                2,  12870 ),
+                new Bot(&quot;AggressiveBot&quot;, &quot;Michael Slattery&quot;,           7,  5779  )
         );
     }
 }
@@ -122,29 +121,44 @@ public abstract class SampleBotsList {
 					</pre>
 				</section>
 				<section>
-					<h2>Iterating over the bots</h2>
+					<h2>Sorting the Bots - Pre Java 8</h2>
 					<pre>
 						<code class="java">
-    List&lt;Bot&gt; bots = SampleBotsList.getSampleBots();
-
-    for (Bot bot: bots) {
-        System.out.println(bot);
+Collections.sort(bots, new Comparator&lt;Bot&gt;() {
+    @Override
+    public int compare(Bot o1, Bot o2) {
+        return o1.getRating() - o2.getRating();
     }
+});
 						</code>
 					</pre>
 				</section>		
 				<section>
-					<h2>Iterating over the bots - using Lambdas</h2>
+					<h2>Sorting the Bots - using Lambdas</h2>
 					<pre>
 						<code class="java">
-    List&lt;Bot&gt; bots = SampleBotsList.getSampleBots();
-
-    bots.forEach(bot -&gt; System.out.println(bot));
+Collections.sort(bots, (bot1, bot2) -> (bot1.getRating() - bot2.getRating()));
 						</code>
 					</pre>
 				</section>	
 				<section>
-					<h2>Iterating over the bots - using Lambdas</h2>
+					<h2>What Exactly happened - Lambdas.</h2>
+					<pre>
+						<code class="java">
+Comparator&lt;Bot&gt; comparator = new Comparator&lt;Bot&gt;() {
+    @Override
+    public int compare(Bot o1, Bot o2) {
+        return o1.getRating() - o2.getRating();
+    }
+}
+				</code>
+				</pre>
+Same thing can be expressed concisely using Lambdas as:
+					<pre>
+						<code class="java">
+Comparator&lt;Bot&gt; comparator = (bot1, bot2) -> (bot1.getRating() - bot2.getRating())
+				</code>
+				</pre>
 				</section>										
 			</div>
 		</div>

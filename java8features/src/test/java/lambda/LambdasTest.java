@@ -39,7 +39,6 @@ public class LambdasTest {
         List<Bot> bots = SampleBotsList.getSampleBots();
         System.out.println("Before: ");
         bots.forEach(System.out::println);
-
         Collections.sort(bots, (bot1, bot2) -> (bot1.getRating() - bot2.getRating()));
 
         System.out.println("After : ");
