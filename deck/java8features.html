@@ -142,7 +142,7 @@ Collections.sort(bots, (bot1, bot2) -> (bot1.getRating() - bot2.getRating()));
 					</pre>
 				</section>	
 				<section>
-					<h2>What Exactly happened - Lambdas.</h2>
+					<h3>Lambdas.</h3>
 					<pre>
 						<code class="java">
 Comparator&lt;Bot&gt; comparator = new Comparator&lt;Bot&gt;() {
@@ -151,15 +151,111 @@ Comparator&lt;Bot&gt; comparator = new Comparator&lt;Bot&gt;() {
         return o1.getRating() - o2.getRating();
     }
 }
-				</code>
-				</pre>
+						</code>
+					</pre>
 Same thing can be expressed concisely using Lambdas as:
 					<pre>
 						<code class="java">
 Comparator&lt;Bot&gt; comparator = (bot1, bot2) -> (bot1.getRating() - bot2.getRating())
 				</code>
 				</pre>
-				</section>										
+				</section>	
+				<section>
+					<h3>Relating Functional Interface to Lambdas</h3>
+					<h4>method with no parameter and no return type</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Foo1 {
+    void doSomething();
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					Pre Java 8: 
+					<pre>
+						<code class="java">
+Foo1 foo1 = new Foo1() {
+	void doSomething() {
+		System.out.println("doSomething executed..");
+	}
+}
+						</code>
+					</pre>
+					With Lambdas:
+					<pre>
+						<code class="java">
+Foo1 foo1 = () -> System.out.println("doSomething executed..");
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h3>Relating Functional Interface to Lambdas</h3>
+					<h4>method with 1 parameter and 1 return type</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Foo2&lt;I, O&gt; {
+    O doSomething(I input);
+}
+
+						</code>
+					</pre>
+				</section>
+				<section>
+					Pre Java 8: 
+					<pre>
+						<code class="java">
+Foo2&lt;String, String&gt; foo2 = new Foo2&lt;String, String&gt;() {
+    @Override
+    public String doSomething(String input) {
+        return input.toUpperCase();
+    }
+};
+
+						</code>
+					</pre>
+					With Lambdas:
+					<pre>
+						<code class="java">
+Foo2&lt;String, String&gt; foo2 = (input -&gt; input.toUpperCase());
+						</code>
+					</pre>
+				</section>		
+
+				<section>
+					Consider a method taking a functional interface as a parameter:
+					<pre>
+						<code class="java">
+public&lt;I,O&gt; O methodWithFoo2(Foo2&lt;I, O&gt; foo2, I input) {
+   return foo2.doSomething(input);
+}
+						</code>
+					</pre>
+					With the knowledge of Lambdas, this method can be invoked this way:
+					<pre>
+						<code class="java">
+methodWithFoo2(
+        ((Bot input) -&gt; {return input.getAuthor().length();}) ,
+        bot);
+
+						</code>
+					</pre>
+				</section>	
+				<section>
+					This can be made way more concise:
+					<pre>
+						<code class="java">
+methodWithFoo2(
+        (input -&gt; input.getAuthor().length()) ,
+        bot);
+						</code>
+					</pre>
+				</section>	
+
+
 			</div>
 		</div>
 
