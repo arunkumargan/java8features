@@ -254,8 +254,51 @@ methodWithFoo2(
 						</code>
 					</pre>
 				</section>	
-
-
+				<section>
+					<h3>Common Functional Interfaces</h3>
+				</section>	
+				<section>
+					<h4>Consumer</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Consumer&lt;T&gt; {
+    void accept(T t);
+}							
+						</code>
+					</pre>
+				</section>	
+				<section>
+					<h4>Supplier</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Supplier&lt;T&gt; {
+    T get();
+}
+						</code>
+					</pre>
+				</section>	
+				<section>
+					<h4>Predicate</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Predicate&lt;T&gt; {
+    boolean test(T t);
+}						</code>
+					</pre>
+				</section>	
+				<section>
+					<h4>Function</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Function&lt;T, R&gt; {
+    R apply(T t);
+}    					</code>
+					</pre>
+				</section>	
 			</div>
 		</div>
 
