@@ -32,4 +32,12 @@ public class Bot {
     public String toString() {
         return String.format("%d: '%s' by %s. Score: %d", this.rating, this.name, this.author, this.score);
     }
+
+    public static int compareByRating(Bot a, Bot b) {
+        return a.getRating() - b.getRating();
+    }
+
+    public static int compareByAuthorName(Bot a, Bot b) {
+        return a.getAuthor().compareTo(b.getAuthor());
+    }
 }
