@@ -259,18 +259,42 @@ methodWithFoo2(
 					If the Lambda expression does nothing but call an existing method, then method references is a good fit
 				</section>	
 				<section>
-					<h4>Method References - Instance Method</h4>
+					<h4>Method References - Reference to a Static method</h4>
 					<pre>
 						<code class="java">
-						bots.forEach(bot -> System.out.println(bot));
+						Collections.sort(bots, (bot1, bot2) -> (Bot.compareByRating(bot1, bot2)));
 						</code>
 					</pre>
 					<pre>
 						<code class="java">
-						bots.forEach(System.out::println)
+						Collections.sort(bots, Bot::compareByRating);
 						</code>
 					</pre>
 				</section>	
+				<section>
+					<h4>Method References - Reference to an Instance method</h4>
+					<pre>
+						<code class="java">
+        List<String> botNames =
+                bots.stream()
+                        .map(bot -> bot.getName())
+                        .collect(Collectors.toCollection(ArrayList::new));
+
+        botNames.stream()
+                .map(name -> name.toUpperCase())
+                .forEach(name -> System.out.println(name));
+
+        botNames.stream()
+                .map(String::toUpperCase)
+                .forEach(name -> System.out.println(name));
+						</code>
+					</pre>
+					<pre>
+						<code class="java">
+						Collections.sort(bots, Bot::compareByRating);
+						</code>
+					</pre>
+				</section>				
 				<section>
 					<h4>Common Functional Interfaces</h4>
 				</section>	
