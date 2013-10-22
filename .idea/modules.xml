@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/java8features/features.iml" filepath="$PROJECT_DIR$/java8features/features.iml" />
+      <module fileurl="file://$PROJECT_DIR$/features2/java8features.iml" filepath="$PROJECT_DIR$/features2/java8features.iml" />
+    </modules>
+  </component>
+</project>
+
