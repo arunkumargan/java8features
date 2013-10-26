@@ -22,12 +22,14 @@ public class LambdasTest {
             System.out.println(bot);
         }
 
-        Collections.sort(bots, new Comparator<Bot>() {
+        Comparator<Bot> botComparator = new Comparator<Bot>() {
             @Override
-            public int compare(Bot o1, Bot o2) {
-                return o1.getRating() - o2.getRating();
+            public int compare(Bot b1, Bot b2) {
+                return b1.getRating() - b2.getRating();
             }
-        });
+        };
+
+        Collections.sort(bots, botComparator);
 
         System.out.println("After :");
         for (Bot bot: bots) {
@@ -42,7 +44,11 @@ public class LambdasTest {
         List<Bot> bots = SampleBotsList.getSampleBots();
         System.out.println("Before: ");
         bots.forEach(System.out::println);
-        Collections.sort(bots, (bot1, bot2) -> (bot1.getRating() - bot2.getRating()));
+
+        Comparator<Bot> botComparatorByRating = (b1, b2) -> b1.getRating() - b2.getRating();
+        Comparator<Bot> botComparatorByAuthor = (b1, b2) -> b1.getAuthor().compareTo(b2.getAuthor());
+
+        Collections.sort(bots, botComparatorByRating);
 
         System.out.println("After : ");
         bots.forEach(System.out::println);
@@ -55,14 +61,14 @@ public class LambdasTest {
             public void doSomething() {
                 System.out.println("Foo1: doSomething called");
             }
-        }                                                      ;
+        } ;
 
         foo1.doSomething();
     }
 
     @Test
     public void test04NoParameterNoReturnTypeInterfaceWithJava8() {
-        Foo1 foo1 = () -> System.out.println("Foo1: doSomething called");                                             ;
+        Foo1 foo1 = () -> System.out.println("Foo1: doSomething called");
         foo1.doSomething();
     }
 
@@ -73,12 +79,12 @@ public class LambdasTest {
             public void doSomething() {
                 System.out.println("Foo1: doSomething called");
             }
-        });                                                      ;
+        });
     }
 
     @Test
     public void test06NoParameterNoReturnTypeInterfaceWithJava8() {
-        methodWithFoo1(() -> System.out.println("Foo1: doSomething called"));                                                      ;
+        methodWithFoo1(() -> System.out.println("Foo1: doSomething called"));
     }
 
 

@@ -40,4 +40,5 @@ public class Bot {
     public static int compareByAuthorName(Bot a, Bot b) {
         return a.getAuthor().compareTo(b.getAuthor());
     }
+
 }

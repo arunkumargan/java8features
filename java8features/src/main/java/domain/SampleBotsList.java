@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class SampleBotsList {
     public static List<Bot> getSampleBots() {
@@ -16,4 +18,10 @@ public abstract class SampleBotsList {
                 new Bot("AggressiveBot", "Michael Slattery",           7,  5779  )
         );
     }
+
+    public static Map<String, Bot> getSampleBotsMap() {
+        List<Bot> sampleBots = getSampleBots();
+        return sampleBots.stream().collect(Collectors.toMap((Bot bot) -> bot.getName(), (Bot bot) -> bot ));
+    }
+
 }

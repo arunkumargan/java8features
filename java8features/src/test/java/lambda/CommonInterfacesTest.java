@@ -72,4 +72,19 @@ public class CommonInterfacesTest {
 
         bots.stream().map(bot -> bot.getName() + ":" + bot.getAuthor()).collect(Collectors.toCollection(ArrayList::new));
     }
+
+    @Test
+    public void testBiConsumer() {
+        Map<String, Bot> botsMap = SampleBotsList.getSampleBotsMap();
+        botsMap.forEach((k, v) -> System.out.println(v));
+    }
+
+    @Test
+    public void testBiFunction() {
+        Map<String, Bot> botsMap = SampleBotsList.getSampleBotsMap();
+        Bot superBot = botsMap.computeIfPresent("Schizoid", (k, v) -> new Bot("SuperSchizoid", "Michael Dowden", 1, 100000));
+
+        System.out.println(superBot);
+
+    }
 }
