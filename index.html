@@ -35,7 +35,7 @@
 			<div class="slides">
 				<section>
 					<h1>Java 8</h1>
-
+					Objective: To show how Java 8 will make your code more concise and readable
 				</section>
 				<section>
 					<h4>A Functional Interface</h4>
@@ -84,7 +84,22 @@ public interface Foo {
 }
 						</code>
 					</pre>
-				</section>											
+				</section>	
+				<section>
+					<h4>A functional interface is identified by the signature of its one abstract method</h4>
+					
+					<pre>
+						<code class="java">
+@FunctionalInterface					
+public interface Foo {
+    public String doSomething1(int i);
+}
+						</code>
+					</pre>
+					can be identified by its signature as (name of the method is not important):
+					<p><b>parameter:</b> (int i)</p>
+					<p><b>returning:</b> String</p>
+				</section>																
 				<section>
 					<h4>A Bot class</h4>
 					<pre>
@@ -162,6 +177,40 @@ Comparator&lt;Bot&gt; comparator = (bot1, bot2) -> (bot1.getRating() - bot2.getR
 				</section>	
 				<section>
 					<h4>Relating Functional Interface to Lambdas</h4>
+					<pre>
+						<code class="java">
+@FunctionalInterface
+public interface Foo1 {
+    ReturnType doSomething(Param1 p1, Param2 p2, Param1 p3);
+}
+						</code>
+					</pre>
+					<pre>
+						<code class="java">
+Foo1 foo = new Foo1 {
+    public ReturnType doSomething(Param1 p1, Param2 p2, Param1 p3) {
+        ...
+        return r;
+    }	
+};	
+
+TO:
+
+Foo1 foo = (Param1 p1, Param2 p2, Param3 p3) -> {
+	...
+	return r;
+};
+
+Foo1 foo = (p1, p2, p3) -> {
+	...
+	return r;
+};
+
+						</code>
+					</pre>
+				</section>				
+				<section>
+					<h4>Relating Functional Interface to Lambdas</h4>
 					<h4>method with no parameter and no return type</h4>
 					<pre>
 						<code class="java">
@@ -177,9 +226,9 @@ public interface Foo1 {
 					<pre>
 						<code class="java">
 Foo1 foo1 = new Foo1() {
-	void doSomething() {
-		System.out.println("doSomething executed..");
-	}
+    void doSomething() {
+        System.out.println("doSomething executed..");
+    }
 }
 						</code>
 					</pre>
@@ -340,13 +389,6 @@ public interface Function&lt;T, R&gt; {
 }    					</code>
 					</pre>
 				</section>	
-				<section>
-					<h4>To be added..</h4>
-					<pre>
-						<code class="java">
-  						</code>
-					</pre>
-				</section>	
 
 			</div>
 		</div>
@@ -364,8 +406,8 @@ public interface Function&lt;T, R&gt; {
 				history: true,
 				center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: 'none', // default/cube/page/concave/zoom/linear/fade/none
+				theme: 'night', // available themes are in /css/theme
+				transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
