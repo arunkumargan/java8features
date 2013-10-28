@@ -35,7 +35,53 @@
 			<div class="slides">
 				<section>
 					<h1>Java 8</h1>
-					Objective: To show how Java 8 will make your code more concise and readable
+				</section>
+				<section>
+					<p><b>Java 8 JDK Download: </b> https://jdk8.java.net/download.html</p>
+					<p><b>IDE:</b> 
+						Intellij has the best support currently-http://www.jetbrains.com/idea/download/
+					</p>
+				</section>
+				<section>
+					<h4>A Taste of Lambdas</h4>
+				</section>								
+				<section>
+					<h4>A Bot class</h4>
+					<pre>
+						<code class="java">
+public class Bot {
+    private final String name;
+    private final String author;
+    private final int rating;
+    private final int score;
+    ....
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h4>Sample Bots</h4>
+					<pre>
+						<code class="java">
+public abstract class SampleBotsList {
+    public static List&lt;Bot&gt; getSampleBots() {
+        return Arrays.asList(
+                new Bot(&quot;SeafarerRobot&quot;, &quot;Biju Kunjummen&quot;,             4,  9232  ),
+                new Bot(&quot;Dreamer&quot;,       &quot;Rick Ryker&quot;,                 8,  5129  ),
+                new Bot(&quot;DrunkenBoxer&quot;,  &quot;Courtney &amp; Courtland Jones&quot;, 3,  11428 ),
+                new Bot(&quot;Dandroid&quot;,      &quot;Dan Gradl&quot;,                  5,  7896  ),
+                new Bot(&quot;Karolos&quot;,       &quot;Chuck Eastus&quot;,               1,  21772 ),
+                new Bot(&quot;Schizoid&quot;,      &quot;Michael Dowden&quot;,             6,  6428  ),
+                new Bot(&quot;TaggartBot&quot;,    &quot;Don Taggart&quot;,                2,  12870 ),
+                new Bot(&quot;AggressiveBot&quot;, &quot;Michael Slattery&quot;,           7,  5779  )
+        );
+    }
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h5> A Taste of Lambdas</h5> 
 				</section>
 				<section>
 					<h4>A Functional Interface</h4>
@@ -100,41 +146,6 @@ public interface Foo {
 					<p><b>parameter:</b> (int i)</p>
 					<p><b>returning:</b> String</p>
 				</section>																
-				<section>
-					<h4>A Bot class</h4>
-					<pre>
-						<code class="java">
-public class Bot {
-    private final String name;
-    private final String author;
-    private final int rating;
-    private final int score;
-    ....
-}
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h4>Sample Bots</h4>
-					<pre>
-						<code class="java">
-public abstract class SampleBotsList {
-    public static List&lt;Bot&gt; getSampleBots() {
-        return Arrays.asList(
-                new Bot(&quot;SeafarerRobot&quot;, &quot;Biju Kunjummen&quot;,             4,  9232  ),
-                new Bot(&quot;Dreamer&quot;,       &quot;Rick Ryker&quot;,                 8,  5129  ),
-                new Bot(&quot;DrunkenBoxer&quot;,  &quot;Courtney &amp; Courtland Jones&quot;, 3,  11428 ),
-                new Bot(&quot;Dandroid&quot;,      &quot;Dan Gradl&quot;,                  5,  7896  ),
-                new Bot(&quot;Karolos&quot;,       &quot;Chuck Eastus&quot;,               1,  21772 ),
-                new Bot(&quot;Schizoid&quot;,      &quot;Michael Dowden&quot;,             6,  6428  ),
-                new Bot(&quot;TaggartBot&quot;,    &quot;Don Taggart&quot;,                2,  12870 ),
-                new Bot(&quot;AggressiveBot&quot;, &quot;Michael Slattery&quot;,           7,  5779  )
-        );
-    }
-}
-						</code>
-					</pre>
-				</section>
 				<section>
 					<h4>Sorting the Bots - Pre Java 8</h4>
 					<pre>
@@ -232,7 +243,7 @@ Foo1 foo1 = new Foo1() {
 }
 						</code>
 					</pre>
-					With Lambdas:
+					With Lambdas(burger arrow!):
 					<pre>
 						<code class="java">
 Foo1 foo1 = () -> System.out.println("doSomething executed..");
@@ -324,26 +335,41 @@ methodWithFoo2(
 					<h4>Method References - Reference to an Instance method</h4>
 					<pre>
 						<code class="java">
-        List<String> botNames =
-                bots.stream()
-                        .map(bot -> bot.getName())
-                        .collect(Collectors.toCollection(ArrayList::new));
-
+ 
         botNames.stream()
                 .map(name -> name.toUpperCase())
-                .forEach(name -> System.out.println(name));
-
-        botNames.stream()
-                .map(String::toUpperCase)
                 .forEach(name -> System.out.println(name));
 						</code>
 					</pre>
 					<pre>
 						<code class="java">
-						Collections.sort(bots, Bot::compareByRating);
+        botNames.stream()
+                .map(String::toUpperCase)
+                .forEach(System.out::println);						
+            			</code>
+					</pre>
+				</section>	
+				<section>
+					<h4>Method References - Reference to a Constructor</h4>
+					<pre>
+						<code class="java">
+private &lt;T&gt; List&lt;T&gt; newList(Supplier&lt;List&lt;T&gt;&gt; supplier) {
+    return supplier.get();
+}
+
+List&lt;String&gt; list1 = newList(LinkedList::new);
+List&lt;String&gt; list2 = newList(ArrayList::new);
+
+Equivalent of: 
+
+new Supplier&lt;LinkedList&lt;String&gt;&gt; {
+	public LinkedList&lt;String&gt; get() {
+		new LinkedList&lt;String&gt;();
+	}
+}
 						</code>
 					</pre>
-				</section>				
+				</section>							
 				<section>
 					<h4>Common Functional Interfaces</h4>
 				</section>	
