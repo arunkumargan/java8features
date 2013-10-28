@@ -24,4 +24,12 @@ public abstract class SampleBotsList {
         return sampleBots.stream().collect(Collectors.toMap((Bot bot) -> bot.getName(), (Bot bot) -> bot ));
     }
 
+
+    public static List<Bot> getSubset(Condition<Bot> condition) {
+       return getSampleBots()
+               .stream()
+               .filter(bot -> condition.test(bot))
+               .collect(Collectors.toList());
+    }
+
 }

@@ -4,10 +4,8 @@ import domain.Bot;
 import domain.SampleBotsList;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class MethodReferenceTest {
@@ -35,16 +33,24 @@ public class MethodReferenceTest {
 
         botNames.stream()
                 .map(String::toUpperCase)
-                .forEach(name -> System.out.println(name));
+                .forEach(System.out::println);
     }
 
 
     @Test
     public void constructorReference() {
-
+        List<String> list1 = newList(LinkedList::new);
+        List<String> list2 = newList(ArrayList::new);
+        list2.add("one");
+        list2.add("two");
+        list2.forEach(System.out::println);
     }
 
     public <F, T> void transfer(Collection<F> source, Collection<T> dest) {
 
+    }
+
+    private <T> List<T> newList(Supplier<List<T>> supplier) {
+        return supplier.get();
     }
 }

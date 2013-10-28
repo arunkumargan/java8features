@@ -7,11 +7,23 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 public class LambdasTest {
+
+    @Test
+    public void test00TasteOfLambdas() {
+        List<Bot> bots = SampleBotsList.getSampleBots();
+    }
+
+    private Predicate<? super Bot> top5() {
+        return bot -> bot.getRating() <= 5;
+    }
+
 
     @Test
     public void test01IterateOverBotsAndSort() {
