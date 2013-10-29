@@ -35,6 +35,7 @@
 			<div class="slides">
 				<section>
 					<h1>Java 8</h1>
+					GA on: 03/18/2014
 				</section>
 				<section>
 					<p><b>Java 8 JDK Download: </b> https://jdk8.java.net/download.html</p>
@@ -79,9 +80,6 @@ public abstract class SampleBotsList {
 }
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h5> A Taste of Lambdas</h5> 
 				</section>
 				<section>
 					<h4>A Functional Interface</h4>
@@ -137,7 +135,7 @@ public interface Foo {
 					<pre>
 						<code class="java">
 @FunctionalInterface					
-public interface Foo {
+public interface Foo2 {
     public String doSomething1(int i);
 }
 						</code>
@@ -145,7 +143,29 @@ public interface Foo {
 					can be identified by its signature as (name of the method is not important):
 					<p><b>parameter:</b> (int i)</p>
 					<p><b>returning:</b> String</p>
-				</section>																
+				</section>		
+				<section>
+					Whereas an anonymous instance of Foo1 would have been created this way pre-java8
+					
+					<pre>
+						<code class="java">
+Foo2 foo2 = new Foo2() {
+      @Override
+      public String doSomething(int i) {
+          return "hello";
+      }
+  };
+						</code>
+					</pre>
+
+					It can be done this way now!
+					<pre>
+						<code class="java">
+Foo2 foo2WithLambda = (int i) -> "hello";
+						</code>
+					</pre>
+				</section>
+
 				<section>
 					<h4>Sorting the Bots - Pre Java 8</h4>
 					<pre>
@@ -369,7 +389,11 @@ new Supplier&lt;LinkedList&lt;String&gt;&gt; {
 }
 						</code>
 					</pre>
-				</section>							
+				</section>	
+				<section>
+					<h4>Closure</h4>
+					Closure are lambdas plus reference to the environment that they come from
+				</section>											
 				<section>
 					<h4>Common Functional Interfaces</h4>
 				</section>	
