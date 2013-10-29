@@ -1,5 +1,6 @@
 package domain;
 
+@FunctionalInterface
 public interface Condition<T> {
-    boolean test(T t);
+    boolean check(T t);
 }

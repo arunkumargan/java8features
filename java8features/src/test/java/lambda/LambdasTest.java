@@ -1,6 +1,7 @@
 package lambda;
 
 import domain.Bot;
+import domain.Condition;
 import domain.SampleBotsList;
 import org.junit.Test;
 
@@ -17,11 +18,7 @@ public class LambdasTest {
 
     @Test
     public void test00TasteOfLambdas() {
-        List<Bot> bots = SampleBotsList.getSampleBots();
-    }
 
-    private Predicate<? super Bot> top5() {
-        return bot -> bot.getRating() <= 5;
     }
 
 
@@ -57,10 +54,7 @@ public class LambdasTest {
         System.out.println("Before: ");
         bots.forEach(System.out::println);
 
-        Comparator<Bot> botComparatorByRating = (b1, b2) -> b1.getRating() - b2.getRating();
-        Comparator<Bot> botComparatorByAuthor = (b1, b2) -> b1.getAuthor().compareTo(b2.getAuthor());
-
-        Collections.sort(bots, botComparatorByRating);
+        Collections.sort(bots, (b1, b2) -> b1.getRating() - b2.getRating());
 
         System.out.println("After : ");
         bots.forEach(System.out::println);
@@ -130,9 +124,13 @@ public class LambdasTest {
         Bot bot = SampleBotsList.getSampleBots().get(0);
         assertThat(foo2.doSomething(bot), equalTo(14));
 
-        methodWithFoo2(
-                ((Bot input) -> {return input.getAuthor().length();}) ,
-                bot);
+        methodWithFoo2(((Bot input) -> {return input.getAuthor().length();}), bot);
+    }
+
+    @Test
+    public void test09Closures() {
+        List<Bot> bots = SampleBotsList.getSubsetWithPredicate(SampleBotsList.topN(3));
+        bots.forEach(System.out::println);
     }
 
 

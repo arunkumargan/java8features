@@ -1,11 +1,14 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public abstract class SampleBotsList {
+
     public static List<Bot> getSampleBots() {
         return Arrays.asList(
                 new Bot("SeafarerRobot", "Biju Kunjummen",             4,  9232  ),
@@ -26,10 +29,28 @@ public abstract class SampleBotsList {
 
 
     public static List<Bot> getSubset(Condition<Bot> condition) {
-       return getSampleBots()
-               .stream()
-               .filter(bot -> condition.test(bot))
-               .collect(Collectors.toList());
+        List<Bot> result = new ArrayList<>();
+        for (Bot bot: getSampleBots()) {
+            if (condition.check(bot)) {
+                result.add(bot);
+            }
+        }
+
+        return result;
+    }
+
+    public static List<Bot> getSubsetWithPredicate(Predicate<Bot> condition) {
+        List<Bot> result = new ArrayList<>();
+        for (Bot bot: getSampleBots()) {
+            if (condition.test(bot)) {
+                result.add(bot);
+            }
+        }
+
+        return result;
+    }
+    public static Predicate<Bot> topN(int n) {
+        return bot -> bot.getRating() <= n;
     }
 
 }
