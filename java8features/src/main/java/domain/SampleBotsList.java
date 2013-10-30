@@ -23,40 +23,21 @@ public abstract class SampleBotsList {
         );
     }
 
-
-
     public static Map<String, Bot> getSampleBotsMap() {
         List<Bot> sampleBots = getSampleBots();
         return sampleBots.stream().collect(Collectors.toMap((Bot bot) -> bot.getName(), (Bot bot) -> bot ));
     }
 
-
-
-
-
-    public static List<Bot> getSubset(Condition<Bot> condition) {
-        List<Bot> result = new ArrayList<>();
-        for (Bot bot: getSampleBots()) {
-            if (condition.check(bot)) {
-                result.add(bot);
-            }
-        }
-        return result;
-    }
-
-
-
-
-    public static List<Bot> getSubsetWithPredicate(Predicate<Bot> condition) {
+    public static List<Bot> getSubset(Predicate<Bot> condition) {
         List<Bot> result = new ArrayList<>();
         for (Bot bot: getSampleBots()) {
             if (condition.test(bot)) {
                 result.add(bot);
             }
         }
-
         return result;
     }
+
 
     public static Predicate<Bot> topN(int n) {
         return bot -> bot.getRating() <= n;
@@ -67,5 +48,4 @@ public abstract class SampleBotsList {
     public static Supplier<String> supplier() {
         return () -> buffer.toString();
     }
-
 }

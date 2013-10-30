@@ -133,7 +133,7 @@ public class LambdasTest {
     @Test
     public void test09Closures() {
         Predicate<Bot> predicate = SampleBotsList.topN(2);
-        List<Bot> bots = SampleBotsList.getSubsetWithPredicate(predicate);
+        List<Bot> bots = SampleBotsList.getSubset(predicate);
         bots.forEach(System.out::println);
     }
 
