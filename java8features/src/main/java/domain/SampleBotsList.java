@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class SampleBotsList {
@@ -22,10 +23,15 @@ public abstract class SampleBotsList {
         );
     }
 
+
+
     public static Map<String, Bot> getSampleBotsMap() {
         List<Bot> sampleBots = getSampleBots();
         return sampleBots.stream().collect(Collectors.toMap((Bot bot) -> bot.getName(), (Bot bot) -> bot ));
     }
+
+
+
 
 
     public static List<Bot> getSubset(Condition<Bot> condition) {
@@ -35,9 +41,11 @@ public abstract class SampleBotsList {
                 result.add(bot);
             }
         }
-
         return result;
     }
+
+
+
 
     public static List<Bot> getSubsetWithPredicate(Predicate<Bot> condition) {
         List<Bot> result = new ArrayList<>();
@@ -49,8 +57,15 @@ public abstract class SampleBotsList {
 
         return result;
     }
+
     public static Predicate<Bot> topN(int n) {
         return bot -> bot.getRating() <= n;
+    }
+
+    public static StringBuilder buffer = new StringBuilder("hello");
+
+    public static Supplier<String> supplier() {
+        return () -> buffer.toString();
     }
 
 }

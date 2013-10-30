@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -20,6 +21,8 @@ public class LambdasTest {
     public void test00TasteOfLambdas() {
 
     }
+
+
 
 
     @Test
@@ -129,7 +132,8 @@ public class LambdasTest {
 
     @Test
     public void test09Closures() {
-        List<Bot> bots = SampleBotsList.getSubsetWithPredicate(SampleBotsList.topN(3));
+        Predicate<Bot> predicate = SampleBotsList.topN(2);
+        List<Bot> bots = SampleBotsList.getSubsetWithPredicate(predicate);
         bots.forEach(System.out::println);
     }
 
