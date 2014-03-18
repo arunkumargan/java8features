@@ -19,6 +19,25 @@ public class LambdasTest {
 
     @Test
     public void test00TasteOfLambdas() {
+//        List<Bot> subset = SampleBotsList.getSubset(new Predicate<Bot>() {
+//            @Override
+//            public boolean test(Bot bot) {
+//                return bot.getRating() <= 2;
+//            }
+//        });
+//
+//        subset.forEach(new Consumer<Bot>() {
+//            @Override
+//            public void accept(Bot bot) {
+//                System.out.println(bot);
+//            }
+//        });
+
+        List<Bot> subset = SampleBotsList.getSubset(bot -> bot.getRating() <= 2);
+
+        subset.forEach(System.out::println);
+
+
 
     }
 
@@ -132,9 +151,12 @@ public class LambdasTest {
 
     @Test
     public void test09Closures() {
-        Predicate<Bot> predicate = SampleBotsList.topN(2);
-        List<Bot> bots = SampleBotsList.getSubset(predicate);
-        bots.forEach(System.out::println);
+        Supplier<String> supplier = SampleBotsList.supplier();
+
+        System.out.println(supplier.get());
+        SampleBotsList.buffer.append(" world");
+        System.out.println(supplier.get());
+
     }
 
 

@@ -34,6 +34,7 @@ public class StreamsTest {
     public void testMap() {
         bots.stream()
                 .map(bot -> bot.getAuthor())
+                .map(authorName -> authorName + "a")
                 .forEach(System.out::println);
 
     }
@@ -46,10 +47,17 @@ public class StreamsTest {
                 .collect(Collectors.toList());
         System.out.println("authors = " + authors);
     }
+
+
     @Test
     public void testCollectScore() {
         int totalScore = bots.stream()
-                .mapToInt(Bot::getScore)
+                .mapToInt(bot -> {
+                    if (bot.getRating()==1) {
+                        throw new RuntimeException("Exception");
+                    }
+                    return bot.getScore();
+                })
                 .sum();
         System.out.println("totalScore = " + totalScore);
     }

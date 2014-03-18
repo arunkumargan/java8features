@@ -13,6 +13,10 @@ public class Bot {
         this.score = score;
     }
 
+    public void assignAName(String name) {
+        //
+    }
+
     public String getName() {
         return this.name;
     }
